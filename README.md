@@ -1,6 +1,6 @@
 # Twitter Automation Bot
 
-This project is a Twitter automation bot that generates and posts tweets about technology and futurism.
+This project is a Twitter automation bot that generates and posts tweets about whatever you want.
 
 ## Features
 
@@ -53,21 +53,16 @@ Replace the placeholder values with your actual API keys and tokens.
 - "model=" replace the model name with the one you are using to call and generate the content; 
 - {"role": "system", "content": **THE SYSTEM PROMPT YOU ARE CALLING TO THE MODEL**}, change this system prompt to what suites the best your project.  
 
-Run the bot with:
+Run this script with:
 
 ```
-python twitter_automation_bot/src/main.py
+python twitter_automation_bot/src/tweet_bot.py
 ```
 ## Project Structure
 
 - `twitter_automation_bot/`: Contains the source code for the bot.
 - `logs/`: Directory for log files.
 - `data/`: Directory for data files.
-- `tests/`: Directory for test files.
-
-## Contributing
-
-We welcome contributions to improve the bot's functionality and performance. Please see our CONTRIBUTING.md for guidelines on how to submit improvements and bug fixes.
 
 ## License
 
