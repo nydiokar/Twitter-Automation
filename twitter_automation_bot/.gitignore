@@ -1,0 +1,21 @@
+# Ignore environment files
+*.env
+config/*.env
+
+# Ignore log files
+logs/
+
+# Ignore pycache
+__pycache__/
+*.pyc
+
+# Ignore other sensitive or generated files
+*.json
+
+# Ignore the data directory
+data/
+
+# Don't ignore these files
+!requirements.txt
+!README.md
+
