@@ -15,7 +15,7 @@ This project is a Twitter automation bot that generates and posts tweets about w
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/twitter-automation-bot.git
+   git clone https://github.com/nydiokar/twitter-automation-bot.git
    cd twitter-automation-bot
    ```
 
