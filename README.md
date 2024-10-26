@@ -40,6 +40,19 @@ Replace the placeholder values with your actual API keys and tokens.
 
 ## Usage
 
+**Before running the script:**
+
+1. Ensure you have /images folder and it's filled in with desired images to later post. Pick random image every time.
+
+2. Include desired prompts to #List of prompts because it is using prompts from this list every time it reaches out to the model selected.
+
+3. custom_tweets.txt file is always checked with priority and if there is content there will always post it first. The posted content will be deleted afterwards.
+
+4. In generate_content() change:
+ - "temperature" for variability; 
+- "model=" replace the model name with the one you are using to call and generate the content; 
+- {"role": "system", "content": **THE SYSTEM PROMPT YOU ARE CALLING TO THE MODEL**}, change this system prompt to what suites the best your project.  
+
 Run the bot with:
 
 ```
