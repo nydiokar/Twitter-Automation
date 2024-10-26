@@ -40,10 +40,26 @@ Replace the placeholder values with your actual API keys and tokens.
 
 ## Usage
 
+Before running the bot:
+
+1. Ensure that the data directory is populated with images. You can add your own images to the data/images directory. 
+2. Ensure that the logs directory exists. If it doesn't, the bot will create it.
+3. Ensure that the .env file is in the config directory and that the variables are set correctly.
+
+#List of prompts is just examplary, make sure to populate it with prompts by your taste and that the prompts are unique - this is going to prompt the respective model to generate tweets / content and you don't want it to be the same every time - Twitter API call might fail if you post the same tweet twice.
+
+The way you push content by your choice is through the get_custom_tweet() function which will pick a random tweet from the CUSTOM_TWEETS_FILE and remove it from there after posting. The script will every time pick a different tweet from the file, first checking there for content.
+
+Adjust Tempreture parameter in generate_content() function to get different results as well as model = to the kind of model you are calling. For example "gpt-4o" if you want to use GPT-4o model.
+
+Adjust the system message based on your expectations from the model. {"role": "system", "content": "*Your expectations from the model*"}
+
+Engagement function might not work, depending on your API permissions / limits.
+
 Run the bot with:
 
 ```
-python twitter_automation_bot/src/main.py
+python twitter_automation_bot/src/tweet_bot.py
 ```
 ## Project Structure
 
