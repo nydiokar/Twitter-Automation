@@ -56,7 +56,7 @@ Replace the placeholder values with your actual API keys and tokens.
 Run this script with:
 
 ```
-python twitter_automation_bot/src/tweet_bot.py
+python twitter_automation_bot.src.tweet_bot.py
 ```
 ## Project Structure
 
