@@ -19,19 +19,39 @@ from logging.handlers import RotatingFileHandler
 from collections import deque
 
 # Get the project root directory
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-print(f"Project root directory: {PROJECT_ROOT}")
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-# Set BASE_DIR
-BASE_DIR = os.getenv('BASE_DIR') or str(PROJECT_ROOT / 'twitter_automation_bot')
-print(f"Base directory: {BASE_DIR}")
+# Define the config directory
+CONFIG_DIR = PROJECT_ROOT / 'config'
+
+# Search for any .env file in the config directory
+env_file = next(CONFIG_DIR.glob('*.env'), None)
+
+if env_file:
+    print(f"Found environment file: {env_file}")
+    # Load the environment file
+    load_dotenv(env_file)
+else:
+    print("No .env file found in the config directory.")
+    # You might want to raise an exception here or set default values
+
+# Now you can access environment variables using os.getenv
+TWITTER_API_KEY = os.getenv('TWITTER_API_KEY')
+TWITTER_API_SECRET = os.getenv('TWITTER_API_SECRET')
+TWITTER_ACCESS_TOKEN = os.getenv('TWITTER_ACCESS_TOKEN')
+TWITTER_ACCESS_TOKEN_SECRET = os.getenv('TWITTER_ACCESS_TOKEN_SECRET')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+CUSTOM_TWEETS_FILE = os.getenv('CUSTOM_TWEETS_FILE')
+POSTED_TWEETS_FILE = os.getenv('POSTED_TWEETS_FILE')
+ENGAGEMENT_FILE = os.getenv('ENGAGEMENT_FILE')
+SENTIMENT_FILE = os.getenv('SENTIMENT_FILE')
 
 # Now you can set up logging
 def setup_logging():
     log_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     
     # Create logs directory if it doesn't exist
-    logs_dir = os.path.join(BASE_DIR, 'logs')
+    logs_dir = os.path.join(PROJECT_ROOT, 'logs')
     os.makedirs(logs_dir, exist_ok=True)
     
     log_file = os.path.join(logs_dir, "twitter_bot.log")
@@ -55,7 +75,10 @@ logger.info(f"Current working directory: {current_dir}")
 
 # Possible .env file locations
 env_locations = [
+    PROJECT_ROOT / '.env',
+    PROJECT_ROOT / 'twitter_automation_bot' / '.env',
     PROJECT_ROOT / 'twitter_automation_bot' / 'config' / '.env',
+    PROJECT_ROOT / 'eaccmaxi.env',
     Path(os.getenv('TWITTER_BOT_ENV_FILE', ''))
 ]
 
@@ -135,8 +158,8 @@ def load_config():
     }
     
     # Now set the other file paths
-    LOG_DIR = os.path.join(BASE_DIR, 'logs')
-    DATA_DIR = os.path.join(BASE_DIR, 'data')
+    LOG_DIR = os.path.join(PROJECT_ROOT, 'logs')
+    DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
     LOG_FILE = os.path.join(LOG_DIR, 'twitter_bot.log')
     CUSTOM_TWEETS_FILE = os.path.join(DATA_DIR, config['CUSTOM_TWEETS_FILE'] or 'custom_tweets.txt')
     POSTED_TWEETS_FILE = os.path.join(DATA_DIR, config['POSTED_TWEETS_FILE'] or 'posted_tweets.json')
@@ -520,7 +543,7 @@ def job():
             logger.info(f"Generated tweet: {content}")
         
         if content:
-            image_folder = os.path.join(BASE_DIR, 'data', 'images')
+            image_folder = os.path.join(PROJECT_ROOT, 'data', 'images')
             image_path = get_random_image(image_folder)
             if image_path:
                 logger.info(f"Selected image: {image_path}")
